@@ -21,8 +21,13 @@ Route::get('/delete_product/{id}',[AdminController::class,'delete_product']);
 // e perdorum me cick by id per item kur dojm me pa details e ni produkti
 Route::get('/update_product/{id}',[AdminController::class,'update_product']);
 Route::post('/update_product_confirm/{id}',[AdminController::class,'update_product_confirm']);
+Route::get('/productDetails/{id}',[HomeController::class,'productDetails']);
+Route::post('/add_cart/{id}',[HomeController::class,'add_cart']);
+Route::get('/show_cart',[HomeController::class,'show_cart']);
+Route::get('/remove_product/{id}',[HomeController::class,'remove_product']);
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::post('/add_cart/{id}',[HomeController::class,'add_cart']);
 
-Route::get('/productDetails/{id}',[UserController::class,'productDetails']);
 
 
 

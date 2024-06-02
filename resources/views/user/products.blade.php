@@ -2,18 +2,20 @@
 
 
 @include('admin.script')
-<div  style="display:flex; justify-content:center">
+
+
+<div  style="display:flex; justify-content:center; padding-top:50px;">
 <div class="grid gap-4 grid-cols-5 grid-rows-5 justify-center">
 
     @foreach ($product as $products)
-      <div  style="margin-top:60px; margin:20px; width:230px; display:flex; flex-direction:column; justify-content:space-between;" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="#">
+      <div    style="margin-top:60px; margin:20px; width:230px; display:flex; flex-direction:column; justify-content:space-between;" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <a href="{{ url('productDetails',$products->id)}}">
           <div style="width:100%; height:230px; overflow:hidden;">
               <img class="w-full h-full object-cover" src="/product/{{$products->image}}" alt="product image" />
           </div>
       </a>
       <div class="flex-grow px-5 pb-5">
-         <a href="#">
+         <a href="{{ url('productDetails',$products->id)}}">
              <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ $products->title }}</h5>
              <h1>{{$products->descrition}}</h1>
          </a>
@@ -31,25 +33,40 @@
       </div>
       <div class="px-3 pb-3 mt-auto">
         <div>
-            @if ($products->discountPrice > 0)
+            @if ($products->discountPrice > 1)
             <span class="text-2xl font-bold text-red-900 dark:text-white line-through decoration-extra-thick">$ {{$products->price}}</span>
         
             <div class="flex items-center justify-between mt-2">
                 <span class="text-2xl font-bold text-green-900 green:text-white">$ {{$products->discountPrice}}</span>
-                <a href="{{ url('details',$products->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
+                <form action="{{url('add_cart',$products->id)}}" method="POST">
+                    @csrf
+  
+                  <input value="Add to cart" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"></input>
+  
+              </form>
             </div>
         @else 
+    
             <div class="flex items-center justify-between mt-2">
                 <span class="text-2xl font-bold text-black-900 dark:text-white">$ {{$products->price}}</span>
-                <a href="{{ url('details',$products->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
+            <form action="{{url('add_cart',$products->id)}}"  method="POST">
+                  @csrf
+          
+
+                <input value="Add to cart" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"></input>
+
+            </form>
             </div>
-        @endif
-        
+       
+            @endif
          </div>
         
       </div>
       </div>
     @endforeach
+
+   
+
 
     
   {{-- kjo lidhet $product = Products::paginate(3) te home controlleri psh na shfaq 3 produkte edhe shigjetata per page tjt
@@ -67,3 +84,4 @@
     
 </div>
 </div>
+
