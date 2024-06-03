@@ -92,6 +92,19 @@
                @include('user.header')
 
 
+               @if(session()->has('message'))
+               <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                   <span class="font-medium">
+                    
+                       {{session()->get('message')}} </span> 
+           
+                       <button class="close" type="button" aria-label="Close alert">
+                           <span aria-hidden="true">×</span>
+                       </button>
+                       
+                 </div>
+               @endif
+
                @if($cart->isEmpty())
 
                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
@@ -160,7 +173,7 @@
                         
                     @endforeach
 
-             
+                   
                     <div id="myModal" class="modal">
                         <span class="close">&times;</span>
                         <img class="modal-content" id="img01">
@@ -172,9 +185,13 @@
                     </tbody>
                     
                 </table>
-                 
+           
             <div style="width:83%;">
                 <h1 style="text-align: right; " >total price: {{$totalprice}}</h1>
+    
+            </div>
+            <div>
+                <a href="{{url('cash_order')}}" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Buy now</a>
             </div>
             
             </div>

@@ -24,13 +24,16 @@ return new class extends Migration
             $table->string('product_quantity')->nullable();
             $table->string('price')->nullable();
             $table->string('product_id')->nullable();
-
+            $table->string('image')->nullable();
+            $table->string('payment_status')->nullable();
+            $table->string('delivey_status')->nullable();
             
 
 
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
